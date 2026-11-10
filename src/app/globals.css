@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
+@theme {
+  --font-space: var(--font-space-grotesk), sans-serif;
+  --color-cream: #f3eee3;
+  --color-cream-light: #faf7f2;
+  --color-cream-card: #fdfbf7;
+  --color-cream-dark: #e6dfd2;
+  --color-ink: #111111;
+  --color-ink-muted: #555555;
+  --color-ink-light: #888888;
+  --color-ink-border: #222222;
+  --color-burnt-orange: #d9541e;
+  --color-burnt-orange-hover: #b84414;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f3eee3;
+  --foreground: #111111;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  background-color: #f3eee3;
+  color: #111111;
+  font-family: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100%;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom scrollbar matching Cream and Ink theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3eee3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4ccbd;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b5ac9b;
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: #d9541e;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  background-color: #b84414;
+  box-shadow: 0 4px 12px rgba(217, 84, 30, 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+/* Card with burnt orange side accent */
+.pocket-card {
+  background-color: #ffffff;
+  border: 1px solid #111111;
+  border-radius: 0.75rem;
+  box-shadow: 3px 3px 0px #111111;
+  transition: all 0.2s ease;
+}
+
+.pocket-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 5px 5px 0px #111111;
+}
+
+.pocket-card-side {
+  border-left: 4px solid #d9541e;
 }
