@@ -121,6 +121,24 @@ export default function Footer() {
                   Terms of Service
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/sitemap"
+                  className="text-[#cccccc] hover:text-[#f3eee3] hover:underline transition-colors"
+                >
+                  HTML Sitemap
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="/sitemap.xml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#cccccc] hover:text-[#f3eee3] hover:underline transition-colors"
+                >
+                  XML Sitemap
+                </a>
+              </li>
             </ul>
           </div>
         </div>

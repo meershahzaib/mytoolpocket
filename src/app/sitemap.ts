@@ -49,6 +49,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.3,
     },
+    {
+      url: `${baseUrl}/sitemap/`,
+      lastModified: releaseDate,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
   ];
 
   const blogPosts: MetadataRoute.Sitemap = [
