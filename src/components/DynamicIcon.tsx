@@ -33,6 +33,7 @@ import {
   Wrench,
   Check,
   Copy,
+  RefreshCw,
   LucideProps
 } from "lucide-react";
 
@@ -106,6 +107,8 @@ export function DynamicIcon({ name, ...props }: DynamicIconProps) {
       return <Check {...props} />;
     case "Copy":
       return <Copy {...props} />;
+    case "RefreshCw":
+      return <RefreshCw {...props} />;
     default:
       return <Wrench {...props} />;
   }

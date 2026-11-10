@@ -17,6 +17,7 @@ import { CATEGORIES } from "@/data/categories";
 import { TOOLS } from "@/data/tools";
 import CategoryCard from "@/components/CategoryCard";
 import ToolCard from "@/components/ToolCard";
+import AdPlaceholder from "@/components/AdPlaceholder";
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -118,6 +119,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Placement 1: Home Page Responsive Leaderboard */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -my-6">
+        <AdPlaceholder slot="leaderboard" id="ad-home-leaderboard" />
+      </div>
+
       {/* Featured Tools Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-8">
@@ -166,6 +172,11 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* Placement 2: Home Page Mid-Content Banner */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -my-6">
+        <AdPlaceholder slot="in-content" id="ad-home-mid-banner" />
+      </div>
 
       {/* Why Choose mytoolpocket.com */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

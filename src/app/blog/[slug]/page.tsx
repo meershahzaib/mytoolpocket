@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -71,6 +72,9 @@ export default async function BlogPostPage({
             Key Takeaway: Always prefer client-side browser utilities when working with private tokens, proprietary text, and unreleased content.
           </div>
         </div>
+
+        {/* Placement 10: In-Article Fluid Ad Banner */}
+        <AdPlaceholder slot="in-content" id="ad-article-in-content" className="my-6" />
 
         <div className="pt-6 border-t border-[#f3eee3] flex items-center justify-between">
           <Link

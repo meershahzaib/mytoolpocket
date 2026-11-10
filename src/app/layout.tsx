@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -20,11 +19,6 @@ export const metadata: Metadata = {
 const extensionScrubberScript = `
 (function() {
   try {
-    var cleanNode = function(el) {
-      if (!el || el.nodeType !== 1) return;
-      if (el.hasAttribute('bis_skin_checked')) el.removeAttribute('bis_skin_checked');
-      if (el.hasAttribute('bis_register')) el.removeAttribute('bis_register');
-    };
     var observer = new MutationObserver(function(mutations) {
       for (var i = 0; i < mutations.length; i++) {
         var m = mutations[i];
@@ -35,19 +29,17 @@ const extensionScrubberScript = `
               m.target.removeAttribute(attr);
             }
           }
-        } else if (m.type === 'childList') {
-          for (var j = 0; j < m.addedNodes.length; j++) {
-            cleanNode(m.addedNodes[j]);
-          }
         }
       }
     });
     observer.observe(document.documentElement, {
       attributes: true,
       subtree: true,
-      childList: true,
       attributeFilter: ['bis_skin_checked', 'bis_register', 'fdprocessedid']
     });
+    setTimeout(function() {
+      try { observer.disconnect(); } catch (err) {}
+    }, 1200);
   } catch (e) {}
 })();
 `;
@@ -67,13 +59,9 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning className="min-h-screen flex flex-col bg-[#f3eee3] text-[#111111]">
-        <Suspense fallback={<div className="h-18 bg-[#f3eee3] border-b-2 border-[#111111]" />}>
-          <Header />
-        </Suspense>
+        <Header />
         <main className="flex-1">
-          <Suspense fallback={<div className="p-8 text-center text-xs text-[#777777]">Loading pocket utility...</div>}>
-            {children}
-          </Suspense>
+          {children}
         </main>
         <Footer />
       </body>

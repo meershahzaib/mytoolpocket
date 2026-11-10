@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import { Calendar, Clock, ArrowRight, BookOpen } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -61,6 +62,9 @@ export default function BlogPage() {
           Deep dives, quick tutorials, and productivity workflows to help you make the most of free web utilities.
         </p>
       </div>
+
+      {/* Placement 9: Blog Index Responsive Leaderboard */}
+      <AdPlaceholder slot="leaderboard" id="ad-blog-leaderboard" className="-mt-4 mb-8" />
 
       {/* Articles Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

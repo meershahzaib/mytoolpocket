@@ -7,6 +7,7 @@ import { CATEGORIES } from "@/data/categories";
 import { TOOLS } from "@/data/tools";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ToolCard from "@/components/ToolCard";
+import AdPlaceholder from "@/components/AdPlaceholder";
 
 export default function AllToolsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -96,6 +97,9 @@ export default function AllToolsPage() {
         </div>
       </div>
 
+      {/* Placement 3: Tools Directory Mid Banner */}
+      <AdPlaceholder slot="banner" id="ad-tools-banner" className="-mt-2 mb-8" />
+
       {/* Tools Grid */}
       {filteredTools.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -120,6 +124,9 @@ export default function AllToolsPage() {
           </button>
         </div>
       )}
+
+      {/* Placement 4: Tools Directory Bottom Leaderboard */}
+      <AdPlaceholder slot="leaderboard" id="ad-tools-bottom-leaderboard" className="mt-12" />
     </div>
   );
 }
