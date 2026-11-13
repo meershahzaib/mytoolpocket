@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 export type AdSlotType = "leaderboard" | "in-content" | "rectangle" | "banner";
 
@@ -8,7 +8,7 @@ interface AdPlaceholderProps {
   className?: string;
 }
 
-export default function AdPlaceholder({
+function AdPlaceholderComponent({
   slot,
   id,
   className = "",
@@ -62,4 +62,6 @@ export default function AdPlaceholder({
     </aside>
   );
 }
+
+export default memo(AdPlaceholderComponent);
 

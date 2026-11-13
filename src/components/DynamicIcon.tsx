@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   FileText,
   Code,
@@ -41,7 +41,7 @@ interface DynamicIconProps extends LucideProps {
   name: string;
 }
 
-export function DynamicIcon({ name, ...props }: DynamicIconProps) {
+function DynamicIconComponent({ name, ...props }: DynamicIconProps) {
   switch (name) {
     case "FileText":
       return <FileText {...props} />;
@@ -113,4 +113,6 @@ export function DynamicIcon({ name, ...props }: DynamicIconProps) {
       return <Wrench {...props} />;
   }
 }
+
+export const DynamicIcon = memo(DynamicIconComponent);
 

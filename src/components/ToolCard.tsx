@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
 import { ToolItem } from "@/data/tools";
@@ -9,11 +9,11 @@ interface ToolCardProps {
   tool: ToolItem;
 }
 
-export default function ToolCard({ tool }: ToolCardProps) {
+function ToolCardComponent({ tool }: ToolCardProps) {
   const category = getCategoryBySlug(tool.category);
 
   return (
-    <div className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-5 shadow-[3px_3px_0px_#111111] hover:shadow-[5px_5px_0px_#111111] hover:-translate-y-0.5 transition-all flex flex-col justify-between">
+    <div className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-5 shadow-[3px_3px_0px_#111111] hover:shadow-[5px_5px_0px_#111111] hover:-translate-y-0.5 transition-[transform,box-shadow] duration-150 ease-out will-change-transform transform-gpu flex flex-col justify-between">
       <div>
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="w-10 h-10 rounded-lg bg-[#f3eee3] border-2 border-[#111111] flex items-center justify-center text-[#111111]">
@@ -64,7 +64,7 @@ export default function ToolCard({ tool }: ToolCardProps) {
         </span>
         <Link
           href={`/${tool.category}/${tool.slug}`}
-          className="px-3 py-1.5 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-md border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-all inline-flex items-center gap-1"
+          className="px-3 py-1.5 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-md border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-[transform,background-color] duration-100 ease-out inline-flex items-center gap-1"
         >
           <span>Use Tool</span>
           <ArrowRight className="w-3.5 h-3.5" />
@@ -73,4 +73,6 @@ export default function ToolCard({ tool }: ToolCardProps) {
     </div>
   );
 }
+
+export default memo(ToolCardComponent);
 

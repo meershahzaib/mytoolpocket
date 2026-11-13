@@ -71,7 +71,7 @@ export default function BlogPage() {
         {BLOG_POSTS.map((post) => (
           <article
             key={post.slug}
-            className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-6 shadow-[3px_3px_0px_#111111] hover:shadow-[5px_5px_0px_#111111] hover:-translate-y-0.5 transition-all flex flex-col justify-between"
+            className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-6 shadow-[3px_3px_0px_#111111] hover:shadow-[5px_5px_0px_#111111] hover:-translate-y-0.5 transition-[transform,box-shadow] duration-150 ease-out will-change-transform transform-gpu flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between gap-3 text-xs mb-3">
@@ -102,7 +102,7 @@ export default function BlogPage() {
             <div className="pt-4 border-t border-[#f3eee3] flex items-center justify-between">
               <span className="text-xs text-[#777777] font-medium">Free Educational Guide</span>
               <button
-                className="px-3.5 py-1.5 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center gap-1.5"
+                className="px-3.5 py-1.5 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-[transform,background-color] duration-100 ease-out flex items-center gap-1.5"
               >
                 <span>Read Article</span>
                 <ArrowRight className="w-3.5 h-3.5" />

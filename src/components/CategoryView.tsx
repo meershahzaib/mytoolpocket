@@ -159,7 +159,7 @@ export default function CategoryView({ categoryId }: CategoryViewProps) {
       </section>
 
       {/* Category Features Box */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-14">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-14 content-visibility-auto">
         <div className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-5 shadow-[2px_2px_0px_#111111]">
           <div className="w-8 h-8 rounded bg-[#f3eee3] border border-[#111111] flex items-center justify-center mb-3">
             <Zap className="w-4 h-4 text-[#111111]" />
@@ -195,7 +195,7 @@ export default function CategoryView({ categoryId }: CategoryViewProps) {
       <AdPlaceholder slot="in-content" id="ad-category-in-content" className="my-10" />
 
       {/* Category FAQ Section */}
-      <section className="bg-[#ffffff] border-2 border-[#111111] rounded-xl p-6 sm:p-8 shadow-[3px_3px_0px_#111111] mb-14">
+      <section className="bg-[#ffffff] border-2 border-[#111111] rounded-xl p-6 sm:p-8 shadow-[3px_3px_0px_#111111] mb-14 content-visibility-auto">
         <div className="flex items-center gap-2 mb-4">
           <HelpCircle className="w-5 h-5 text-[#d9541e]" />
           <h2 className="text-lg sm:text-xl font-bold text-[#111111]">
@@ -213,7 +213,7 @@ export default function CategoryView({ categoryId }: CategoryViewProps) {
       </section>
 
       {/* Explore Other Categories */}
-      <section className="pt-8 border-t-2 border-[#111111]">
+      <section className="pt-8 border-t-2 border-[#111111] content-visibility-auto">
         <h3 className="text-base font-bold text-[#111111] mb-4">
           Explore Other Pocket Toolkits
         </h3>

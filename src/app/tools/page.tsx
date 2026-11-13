@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useDeferredValue } from "react";
 import Link from "next/link";
 import { Search, Filter, Layers, ArrowRight } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
@@ -9,23 +9,31 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ToolCard from "@/components/ToolCard";
 import AdPlaceholder from "@/components/AdPlaceholder";
 
+// Pre-compute category counts statically to avoid 12 filter loops on every keystroke
+const CATEGORY_COUNTS: Record<string, number> = {};
+for (const cat of CATEGORIES) {
+  CATEGORY_COUNTS[cat.slug] = TOOLS.filter((t) => t.category === cat.slug).length;
+}
+
 export default function AllToolsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const deferredSearch = useDeferredValue(searchQuery);
 
   const filteredTools = useMemo(() => {
+    const q = deferredSearch.trim().toLowerCase();
     return TOOLS.filter((tool) => {
       const matchesCategory =
         selectedCategory === "all" || tool.category === selectedCategory;
-      const matchesSearch =
-        searchQuery.trim() === "" ||
-        tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-
-      return matchesCategory && matchesSearch;
+      if (!matchesCategory) return false;
+      if (!q) return true;
+      return (
+        tool.name.toLowerCase().includes(q) ||
+        tool.description.toLowerCase().includes(q) ||
+        tool.tags.some((tag) => tag.toLowerCase().includes(q))
+      );
     });
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, deferredSearch]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -69,7 +77,7 @@ export default function AllToolsPage() {
         <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           <button
             onClick={() => setSelectedCategory("all")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all border border-[#111111] ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors duration-150 border border-[#111111] ${
               selectedCategory === "all"
                 ? "bg-[#111111] text-[#f3eee3] shadow-[2px_2px_0px_#d9541e]"
                 : "bg-[#ffffff] text-[#111111] hover:bg-[#e6dfd2]"
@@ -78,13 +86,13 @@ export default function AllToolsPage() {
             All Tools ({TOOLS.length})
           </button>
           {CATEGORIES.map((cat) => {
-            const count = TOOLS.filter((t) => t.category === cat.slug).length;
+            const count = CATEGORY_COUNTS[cat.slug] || 0;
             const isSelected = selectedCategory === cat.slug;
             return (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.slug)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all border border-[#111111] ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-colors duration-150 border border-[#111111] ${
                   isSelected
                     ? "bg-[#111111] text-[#f3eee3] shadow-[2px_2px_0px_#d9541e]"
                     : "bg-[#ffffff] text-[#111111] hover:bg-[#e6dfd2]"

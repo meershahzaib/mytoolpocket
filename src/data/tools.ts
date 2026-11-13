@@ -201,41 +201,203 @@ export const TOOLS: ToolItem[] = [
   {
     id: "json-formatter",
     slug: "json-formatter",
-    name: "JSON Formatter and Validator",
+    name: "JSON Formatter",
     category: "developer-tools",
-    description: "Format, validate, beautify, and minify JSON data with instant syntax error checking.",
+    description: "Format, beautify, and minify JSON data with instant syntax error checking.",
     iconName: "Code",
     popular: true,
     featured: true,
-    tags: ["json", "formatter", "validator", "beautifier", "developer"]
+    tags: ["json formatter", "beautify json", "format json", "minify json", "json pretty print"]
   },
   {
-    id: "base64-encoder-decoder",
-    slug: "base64-encoder-decoder",
-    name: "Base64 Encoder and Decoder",
+    id: "json-validator",
+    slug: "json-validator",
+    name: "JSON Validator",
     category: "developer-tools",
-    description: "Encode text into Base64 format and decode Base64 strings safely.",
+    description: "Validate JSON syntax against RFC standards with real-time error line highlighting.",
+    iconName: "Check",
+    popular: true,
+    tags: ["json validator", "validate json", "json lint", "syntax checker", "rfc 8259"]
+  },
+  {
+    id: "html-minifier",
+    slug: "html-minifier",
+    name: "HTML Minifier",
+    category: "developer-tools",
+    description: "Compress and minify HTML markup by stripping whitespace, blank lines, and comments.",
+    iconName: "FileCode",
+    popular: true,
+    tags: ["html minifier", "compress html", "minify html", "clean html", "page speed"]
+  },
+  {
+    id: "css-minifier",
+    slug: "css-minifier",
+    name: "CSS Minifier",
+    category: "developer-tools",
+    description: "Shrink CSS stylesheets by removing unnecessary whitespace, comments, and newlines.",
+    iconName: "Palette",
+    popular: true,
+    tags: ["css minifier", "compress css", "minify css", "clean stylesheet", "css optimizer"]
+  },
+  {
+    id: "js-minifier",
+    slug: "js-minifier",
+    name: "JavaScript Minifier",
+    category: "developer-tools",
+    description: "Compress JavaScript files by removing comments, redundant spaces, and line breaks safely.",
+    iconName: "Code",
+    tags: ["javascript minifier", "js minifier", "compress js", "minify javascript", "code shrink"]
+  },
+  {
+    id: "base64-encode-decode",
+    slug: "base64-encode-decode",
+    name: "Base64 Encode/Decode",
+    category: "developer-tools",
+    description: "Encode text into standard Base64 format and decode Base64 strings safely with UTF-8 support.",
     iconName: "Binary",
     popular: true,
-    tags: ["base64", "encoder", "decoder", "binary"]
+    featured: true,
+    tags: ["base64 encoder", "base64 decoder", "base64 encode decode", "binary", "utf8"]
   },
   {
-    id: "url-encoder-decoder",
-    slug: "url-encoder-decoder",
-    name: "URL Encoder and Decoder",
+    id: "url-encode-decode",
+    slug: "url-encode-decode",
+    name: "URL Encoder/Decoder",
     category: "developer-tools",
-    description: "Encode special characters for query strings and decode URL-encoded components.",
+    description: "Percent-encode special characters for URLs and decode percent-encoded query parameters.",
     iconName: "Link",
-    tags: ["url", "uri", "encoding", "decoding"]
+    popular: true,
+    tags: ["url encoder decoder", "url encode", "url decode", "percent encoding", "query string"]
   },
   {
-    id: "html-entity-converter",
-    slug: "html-entity-converter",
+    id: "regex-tester",
+    slug: "regex-tester",
+    name: "Regex Tester",
+    category: "developer-tools",
+    description: "Test regular expressions in real time with live match highlights, capture groups, and flag toggles.",
+    iconName: "Search",
+    popular: true,
+    featured: true,
+    tags: ["regex tester", "regular expressions", "regex test", "match patterns", "regex groups"]
+  },
+  {
+    id: "uuid-generator",
+    slug: "uuid-generator",
+    name: "UUID Generator",
+    category: "developer-tools",
+    description: "Generate cryptographically secure Version 4 UUIDs and GUIDs in bulk with custom formatting.",
+    iconName: "KeyRound",
+    popular: true,
+    tags: ["uuid generator", "guid generator", "v4 uuid", "random uuid", "unique id"]
+  },
+  {
+    id: "hash-generator",
+    slug: "hash-generator",
+    name: "Hash Generator (SHA-256)",
+    category: "developer-tools",
+    description: "Compute cryptographic hashes including SHA-256, SHA-512, SHA-384, and SHA-1 in your browser.",
+    iconName: "ShieldCheck",
+    popular: true,
+    tags: ["hash generator", "sha256", "sha512", "checksum", "cryptography"]
+  },
+  {
+    id: "jwt-decoder",
+    slug: "jwt-decoder",
+    name: "JWT Decoder",
+    category: "developer-tools",
+    description: "Decode and inspect JSON Web Tokens safely. View Header, Payload claims, and expiration dates.",
+    iconName: "Code",
+    popular: true,
+    featured: true,
+    tags: ["jwt decoder", "decode jwt", "json web token", "jwt claims", "jwt inspect"]
+  },
+  {
+    id: "color-converter",
+    slug: "color-converter",
+    name: "Color Converter",
+    category: "developer-tools",
+    description: "Translate color codes between HEX, RGB, HSL, and HSV with live palette preview and CSS snippets.",
+    iconName: "Palette",
+    popular: true,
+    tags: ["hex to rgb", "color converter", "rgb to hex", "hex to hsl", "css colors"]
+  },
+  {
+    id: "css-gradient-generator",
+    slug: "css-gradient-generator",
+    name: "CSS Gradient Generator",
+    category: "developer-tools",
+    description: "Design linear and radial CSS gradients visually with angle controls and copyable CSS declarations.",
+    iconName: "Sparkles",
+    popular: true,
+    tags: ["css gradient generator", "gradient generator", "linear gradient", "radial gradient", "css background"]
+  },
+  {
+    id: "box-shadow-generator",
+    slug: "box-shadow-generator",
+    name: "Box Shadow Generator",
+    category: "developer-tools",
+    description: "Visually craft smooth elevation and neo-brutalist CSS box shadows with live interactive preview.",
+    iconName: "Layers",
+    popular: true,
+    tags: ["box shadow generator", "css box shadow", "shadow generator", "elevation", "neo brutalism"]
+  },
+  {
+    id: "border-radius-generator",
+    slug: "border-radius-generator",
+    name: "Border Radius Generator",
+    category: "developer-tools",
+    description: "Sculpt rounded corners and asymmetrical CSS shapes visually with independent corner radius controls.",
+    iconName: "RefreshCw",
+    tags: ["border radius generator", "css border radius", "rounded corners", "css shapes", "blob generator"]
+  },
+  {
+    id: "markdown-to-html",
+    slug: "markdown-to-html",
+    name: "Markdown to HTML",
+    category: "developer-tools",
+    description: "Convert Markdown syntax into clean semantic HTML markup with live visual and code preview.",
+    iconName: "FileText",
+    popular: true,
+    tags: ["markdown to html", "md to html", "markdown converter", "markdown preview", "html generator"]
+  },
+  {
+    id: "unix-timestamp-converter",
+    slug: "unix-timestamp-converter",
+    name: "Unix Timestamp Converter",
+    category: "developer-tools",
+    description: "Convert Epoch timestamps to human-readable dates and translate calendar dates to Unix timestamps.",
+    iconName: "Clock",
+    popular: true,
+    tags: ["unix timestamp converter", "epoch converter", "epoch time", "timestamp to date", "current timestamp"]
+  },
+  {
+    id: "cron-expression-generator",
+    slug: "cron-expression-generator",
+    name: "Cron Expression Generator",
+    category: "developer-tools",
+    description: "Build, schedule, and explain cron expressions visually with plain-English human translations.",
+    iconName: "Clock",
+    popular: true,
+    tags: ["cron expression generator", "cron generator", "cron schedule", "crontab", "cron job"]
+  },
+  {
+    id: "color-picker",
+    slug: "color-picker",
+    name: "Color Picker",
+    category: "developer-tools",
+    description: "Explore color spectrums, generate shades and tints, and copy HEX, RGB, and HSL values instantly.",
+    iconName: "Palette",
+    popular: true,
+    tags: ["color picker", "html color picker", "eyedropper", "color chooser", "css palette"]
+  },
+  {
+    id: "html-entity-encoder",
+    slug: "html-entity-encoder",
     name: "HTML Entity Encoder",
     category: "developer-tools",
-    description: "Convert special symbols into HTML entities and decode them back to plain characters.",
+    description: "Escape special characters into HTML entities or decode entities back to plain readable text.",
     iconName: "FileCode",
-    tags: ["html", "entities", "escape"]
+    tags: ["html entity encoder", "html entities", "escape html", "unescape html", "html special chars"]
   },
 
   // SEO Tools
@@ -248,7 +410,18 @@ export const TOOLS: ToolItem[] = [
     iconName: "Search",
     popular: true,
     featured: true,
-    tags: ["seo", "meta", "open graph", "twitter card"]
+    tags: ["meta tag generator", "seo tags", "open graph", "twitter card", "meta description"]
+  },
+  {
+    id: "open-graph-generator",
+    slug: "open-graph-generator",
+    name: "Open Graph Generator",
+    category: "seo-tools",
+    description: "Create social media Open Graph meta tags for Facebook, LinkedIn, Discord, and Pinterest with live card preview.",
+    iconName: "Share2",
+    popular: true,
+    featured: true,
+    tags: ["open graph generator", "og tags", "facebook tags", "social card", "og image"]
   },
   {
     id: "robots-txt-generator",
@@ -257,16 +430,96 @@ export const TOOLS: ToolItem[] = [
     category: "seo-tools",
     description: "Create search crawler directives for Googlebot, Bingbot, and other web crawlers.",
     iconName: "FileTerminal",
-    tags: ["robots", "crawler", "sitemap", "seo"]
+    popular: true,
+    tags: ["robots.txt generator", "crawler directives", "robots txt", "googlebot", "sitemap link"]
   },
   {
-    id: "slug-generator",
-    slug: "slug-generator",
-    name: "URL Slug Generator",
+    id: "keyword-density-checker",
+    slug: "keyword-density-checker",
+    name: "Keyword Density Checker",
     category: "seo-tools",
-    description: "Turn article titles and text into clean, URL-friendly kebab-case slugs.",
+    description: "Analyze keyword frequency, density percentages, and multi-word phrases to avoid keyword stuffing.",
+    iconName: "FileText",
+    popular: true,
+    tags: ["keyword density checker", "keyword frequency", "keyword stuffing", "seo copy analyzer", "ngram"]
+  },
+  {
+    id: "serp-preview",
+    slug: "serp-preview",
+    name: "SERP Snippet Preview",
+    category: "seo-tools",
+    description: "Simulate exact Google desktop and mobile search result cards with real-time character meters.",
     iconName: "Globe",
-    tags: ["slug", "url", "seo", "permalinks"]
+    popular: true,
+    featured: true,
+    tags: ["serp preview tool", "google serp preview", "search simulator", "title pixel length", "meta description preview"]
+  },
+  {
+    id: "utm-link-builder",
+    slug: "utm-link-builder",
+    name: "UTM Link Builder",
+    category: "seo-tools",
+    description: "Generate clean Google Analytics campaign tracking URLs with source, medium, and campaign parameters.",
+    iconName: "Link",
+    popular: true,
+    tags: ["utm builder", "utm tracking", "google analytics utm", "campaign url", "utm source"]
+  },
+  {
+    id: "schema-markup-generator",
+    slug: "schema-markup-generator",
+    name: "Schema Markup Generator",
+    category: "seo-tools",
+    description: "Generate schema.org structured data in JSON-LD format for Organizations, Articles, Products, and Local Businesses.",
+    iconName: "Code",
+    popular: true,
+    tags: ["schema markup generator", "json-ld generator", "structured data", "rich snippets", "schema.org"]
+  },
+  {
+    id: "faq-schema-generator",
+    slug: "faq-schema-generator",
+    name: "FAQ Schema Generator",
+    category: "seo-tools",
+    description: "Generate FAQPage JSON-LD structured data to earn rich expandable questions in Google search results.",
+    iconName: "HelpCircle",
+    popular: true,
+    tags: ["faq schema generator", "faqpage schema", "rich results", "structured faqs", "json ld faq"]
+  },
+  {
+    id: "htaccess-redirect-generator",
+    slug: "htaccess-redirect-generator",
+    name: "Htaccess Redirect Generator",
+    category: "seo-tools",
+    description: "Create Apache mod_rewrite rules for 301 permanent redirects, HTTPS security, and WWW canonicalization.",
+    iconName: "ArrowLeftRight",
+    tags: ["htaccess redirect generator", "301 redirect", "apache redirect", "force https", "mod_rewrite"]
+  },
+  {
+    id: "heading-checker",
+    slug: "heading-checker",
+    name: "Heading Structure Checker",
+    category: "seo-tools",
+    description: "Audit H1, H2, and H3 heading hierarchies in HTML and Markdown to identify outline and accessibility issues.",
+    iconName: "ListFilter",
+    tags: ["h1 h2 checker", "heading checker", "heading hierarchy", "heading structure", "document outline"]
+  },
+  {
+    id: "reading-time-calculator",
+    slug: "reading-time-calculator",
+    name: "Reading Time Calculator",
+    category: "seo-tools",
+    description: "Calculate estimated reading and speaking times based on standard adult pacing rates for blog articles and speeches.",
+    iconName: "Clock",
+    tags: ["reading time calculator", "read time", "words per minute", "speaking time", "article length"]
+  },
+  {
+    id: "sitemap-generator",
+    slug: "sitemap-generator",
+    name: "Sitemap XML Generator",
+    category: "seo-tools",
+    description: "Generate compliant sitemaps.org XML files from URL lists with customizable priorities and change frequencies.",
+    iconName: "Layers",
+    popular: true,
+    tags: ["sitemap generator", "xml sitemap", "sitemap xml generator", "google sitemap", "url list sitemap"]
   },
 
   // YouTube Tools

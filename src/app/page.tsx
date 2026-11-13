@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo, useDeferredValue } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -19,20 +19,24 @@ import CategoryCard from "@/components/CategoryCard";
 import ToolCard from "@/components/ToolCard";
 import AdPlaceholder from "@/components/AdPlaceholder";
 
+// Pre-computed static slices to eliminate redundant renders and filtering
+const FEATURED_TOOLS = TOOLS.filter((tool) => tool.featured).slice(0, 6);
+const POPULAR_TOOLS = TOOLS.filter((tool) => tool.popular).slice(0, 6);
+
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const deferredQuery = useDeferredValue(searchQuery);
 
-  const filteredTools = searchQuery.trim()
-    ? TOOLS.filter(
-        (tool) =>
-          tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          tool.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-      )
-    : [];
-
-  const featuredTools = TOOLS.filter((tool) => tool.featured).slice(0, 6);
-  const popularTools = TOOLS.filter((tool) => tool.popular).slice(0, 6);
+  const filteredTools = useMemo(() => {
+    const q = deferredQuery.trim().toLowerCase();
+    if (!q) return [];
+    return TOOLS.filter(
+      (tool) =>
+        tool.name.toLowerCase().includes(q) ||
+        tool.description.toLowerCase().includes(q) ||
+        tool.tags.some((tag) => tag.toLowerCase().includes(q))
+    ).slice(0, 10);
+  }, [deferredQuery]);
 
   return (
     <div className="space-y-16 pb-16">
@@ -40,8 +44,7 @@ export default function HomePage() {
       <section className="relative pt-12 pb-16 px-4 sm:px-6 lg:px-8 border-b-2 border-[#111111] bg-[#f3eee3]">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ffffff] border border-[#111111] shadow-[2px_2px_0px_#111111] text-xs font-bold text-[#111111]">
-            <Sparkles className="w-3.5 h-3.5 text-[#d9541e]" />
-            <span>Over 25+ browser utilities in your pocket</span>
+            <span>Over {TOOLS.length}+ browser utilities in your pocket</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-black text-[#111111] tracking-tight leading-tight">
@@ -69,7 +72,7 @@ export default function HomePage() {
               />
               <Link
                 href={`/tools?q=${encodeURIComponent(searchQuery)}`}
-                className="absolute right-2 px-4 py-2.5 text-xs sm:text-sm font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-all"
+                className="absolute right-2 px-4 py-2.5 text-xs sm:text-sm font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-[transform,background-color] duration-100"
               >
                 Find Tool
               </Link>
@@ -120,8 +123,8 @@ export default function HomePage() {
       </section>
 
       {/* Placement 1: Home Page Responsive Leaderboard */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -my-6">
-        <AdPlaceholder slot="leaderboard" id="ad-home-leaderboard" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8">
+        <AdPlaceholder slot="leaderboard" id="ad-home-leaderboard" className="!my-0" />
       </div>
 
       {/* Featured Tools Grid */}
@@ -146,14 +149,14 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredTools.map((tool) => (
+          {FEATURED_TOOLS.map((tool) => (
             <ToolCard key={tool.id} tool={tool} />
           ))}
         </div>
       </section>
 
       {/* Browse All 12 Categories */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content-visibility-auto">
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
           <span className="text-xs font-bold uppercase tracking-wider text-[#d9541e]">
             Complete Directory
@@ -174,12 +177,12 @@ export default function HomePage() {
       </section>
 
       {/* Placement 2: Home Page Mid-Content Banner */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -my-6">
-        <AdPlaceholder slot="in-content" id="ad-home-mid-banner" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8">
+        <AdPlaceholder slot="in-content" id="ad-home-mid-banner" className="!my-0" />
       </div>
 
       {/* Why Choose mytoolpocket.com */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content-visibility-auto">
         <div className="bg-[#ffffff] border-2 border-[#111111] border-l-8 border-l-[#d9541e] rounded-2xl p-8 sm:p-12 shadow-[4px_4px_0px_#111111]">
           <div className="max-w-3xl mb-8">
             <span className="text-xs font-bold uppercase tracking-wider text-[#d9541e]">
@@ -228,7 +231,7 @@ export default function HomePage() {
       </section>
 
       {/* Call to action section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content-visibility-auto">
         <div className="bg-[#111111] text-[#f3eee3] border-2 border-[#111111] rounded-2xl p-8 sm:p-12 text-center space-y-5">
           <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
             Ready to speed up your daily work?
@@ -239,14 +242,14 @@ export default function HomePage() {
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/tools"
-              className="px-6 py-3 text-sm font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#ffffff] shadow-[3px_3px_0px_#ffffff] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center gap-2"
+              className="px-6 py-3 text-sm font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#ffffff] shadow-[3px_3px_0px_#ffffff] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-[transform,background-color] duration-100 flex items-center gap-2"
             >
               <span>Explore All Tools</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/about"
-              className="px-6 py-3 text-sm font-bold bg-[#ffffff] text-[#111111] rounded-lg border border-[#ffffff] shadow-[3px_3px_0px_#d9541e] hover:bg-[#f3eee3] active:translate-x-0.5 active:translate-y-0.5 transition-all"
+              className="px-6 py-3 text-sm font-bold bg-[#ffffff] text-[#111111] rounded-lg border border-[#ffffff] shadow-[3px_3px_0px_#d9541e] hover:bg-[#f3eee3] active:translate-x-0.5 active:translate-y-0.5 transition-[transform,background-color] duration-100"
             >
               About the Platform
             </Link>

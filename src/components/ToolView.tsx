@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { getCategoryBySlug } from "@/data/categories";
 import { getToolBySlug, getToolsByCategory, ToolItem } from "@/data/tools";
 import { getToolSeoData } from "@/data/textToolsSeoData";
+import { getDevToolSeoData } from "@/data/devToolsSeoData";
+import { getSeoToolSeoData } from "@/data/seoToolsSeoData";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ToolRenderer from "@/components/ToolRenderer";
 import ToolCard from "@/components/ToolCard";
@@ -19,7 +21,7 @@ interface ToolViewProps {
 export default function ToolView({ categorySlug, toolSlug }: ToolViewProps) {
   const category = getCategoryBySlug(categorySlug);
   const tool = getToolBySlug(categorySlug, toolSlug);
-  const seoData = getToolSeoData(toolSlug);
+  const seoData = getSeoToolSeoData(toolSlug) || getDevToolSeoData(toolSlug) || getToolSeoData(toolSlug);
 
   if (!category || !tool) {
     notFound();
@@ -225,7 +227,7 @@ export default function ToolView({ categorySlug, toolSlug }: ToolViewProps) {
       </div>
 
       {/* 5. How to Use Section */}
-      <section className="bg-[#ffffff] border-2 border-[#111111] border-l-6 border-l-[#d9541e] rounded-xl p-6 sm:p-8 shadow-[3px_3px_0px_#111111] mb-10">
+      <section className="bg-[#ffffff] border-2 border-[#111111] border-l-6 border-l-[#d9541e] rounded-xl p-6 sm:p-8 shadow-[3px_3px_0px_#111111] mb-10 content-visibility-auto">
         <div className="flex items-center gap-2 mb-4">
           <CheckCircle className="w-5 h-5 text-[#d9541e]" />
           <h2 className="text-lg sm:text-xl font-bold text-[#111111]">
@@ -242,7 +244,7 @@ export default function ToolView({ categorySlug, toolSlug }: ToolViewProps) {
       </section>
 
       {/* 6. Features & 7. Who Can Use This Tool */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 content-visibility-auto">
         <section className="bg-[#ffffff] border-2 border-[#111111] rounded-xl p-6 shadow-[3px_3px_0px_#111111]">
           <div className="flex items-center gap-2 mb-4">
             <Sparkles className="w-5 h-5 text-[#d9541e]" />
@@ -275,7 +277,7 @@ export default function ToolView({ categorySlug, toolSlug }: ToolViewProps) {
       </div>
 
       {/* 8. Frequently Asked Questions (with H3 for questions) */}
-      <section className="bg-[#ffffff] border-2 border-[#111111] rounded-xl p-6 sm:p-8 shadow-[3px_3px_0px_#111111] mb-10">
+      <section className="bg-[#ffffff] border-2 border-[#111111] rounded-xl p-6 sm:p-8 shadow-[3px_3px_0px_#111111] mb-10 content-visibility-auto">
         <div className="flex items-center gap-2 mb-5">
           <HelpCircle className="w-5 h-5 text-[#d9541e]" />
           <h2 className="text-lg sm:text-xl font-bold text-[#111111]">
@@ -298,7 +300,7 @@ export default function ToolView({ categorySlug, toolSlug }: ToolViewProps) {
 
       {/* 10. Short Helpful Guide (200-400 words) */}
       {seoData?.guide && (
-        <section className="bg-[#ffffff] border-2 border-[#111111] border-l-6 border-l-[#d9541e] rounded-xl p-6 sm:p-8 shadow-[3px_3px_0px_#111111] mb-10">
+        <section className="bg-[#ffffff] border-2 border-[#111111] border-l-6 border-l-[#d9541e] rounded-xl p-6 sm:p-8 shadow-[3px_3px_0px_#111111] mb-10 content-visibility-auto">
           <div className="flex items-center gap-2 mb-4">
             <BookOpen className="w-5 h-5 text-[#d9541e]" />
             <h2 className="text-lg sm:text-xl font-bold text-[#111111]">
@@ -318,7 +320,7 @@ export default function ToolView({ categorySlug, toolSlug }: ToolViewProps) {
 
       {/* 9. Related Tools (4-6 links) */}
       {relatedTools.length > 0 && (
-        <section className="pt-8 border-t-2 border-[#111111]">
+        <section className="pt-8 border-t-2 border-[#111111] content-visibility-auto">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-lg sm:text-xl font-bold text-[#111111]">

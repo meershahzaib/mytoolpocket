@@ -88,7 +88,7 @@ export default function SitemapPage() {
               href="/sitemap.xml"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 text-xs sm:text-sm font-bold bg-[#d9541e] text-[#ffffff] rounded-xl border-2 border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center gap-2"
+              className="px-4 py-2.5 text-xs sm:text-sm font-bold bg-[#d9541e] text-[#ffffff] rounded-xl border-2 border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-[transform,background-color] duration-100 ease-out flex items-center gap-2"
             >
               <FileCode2 className="w-4 h-4" />
               <span>View XML Sitemap</span>
@@ -134,13 +134,13 @@ export default function SitemapPage() {
             <Link
               key={page.href}
               href={page.href}
-              className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-4 shadow-[2px_2px_0px_#111111] hover:shadow-[4px_4px_0px_#111111] hover:-translate-y-0.5 transition-all group block"
+              className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-4 shadow-[2px_2px_0px_#111111] hover:shadow-[4px_4px_0px_#111111] hover:-translate-y-0.5 transition-[transform,box-shadow] duration-150 ease-out will-change-transform transform-gpu group block"
             >
               <div className="flex items-center justify-between">
                 <span className="font-bold text-[#111111] group-hover:text-[#d9541e] transition-colors text-sm sm:text-base">
                   {page.label}
                 </span>
-                <ArrowRight className="w-4 h-4 text-[#777777] group-hover:text-[#d9541e] group-hover:translate-x-0.5 transition-all" />
+                <ArrowRight className="w-4 h-4 text-[#777777] group-hover:text-[#d9541e] group-hover:translate-x-0.5 transition-transform duration-150 ease-out" />
               </div>
               <p className="text-xs text-[#555555] mt-1.5 leading-relaxed">
                 {page.desc}
@@ -241,7 +241,7 @@ export default function SitemapPage() {
             <Link
               key={article.slug}
               href={`/blog/${article.slug}`}
-              className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-4 shadow-[2px_2px_0px_#111111] hover:shadow-[4px_4px_0px_#111111] hover:-translate-y-0.5 transition-all group block"
+              className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-4 shadow-[2px_2px_0px_#111111] hover:shadow-[4px_4px_0px_#111111] hover:-translate-y-0.5 transition-[transform,box-shadow] duration-150 ease-out will-change-transform transform-gpu group block"
             >
               <div className="flex items-center justify-between gap-2 text-xs mb-1">
                 <span className="px-2 py-0.5 rounded bg-[#f3eee3] border border-[#111111] font-semibold text-[#111111]">

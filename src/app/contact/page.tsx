@@ -116,7 +116,7 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                className="w-full py-3 px-4 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 px-4 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-[transform,background-color] duration-100 ease-out flex items-center justify-center gap-2"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>Submit Message</span>

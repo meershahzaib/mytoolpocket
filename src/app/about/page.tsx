@@ -87,7 +87,7 @@ export default function AboutPage() {
         </p>
         <Link
           href="/tools"
-          className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#ffffff] shadow-[2px_2px_0px_#ffffff] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-all"
+          className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#ffffff] shadow-[2px_2px_0px_#ffffff] hover:bg-[#bf4514] active:translate-x-0.5 active:translate-y-0.5 transition-[transform,background-color] duration-100 ease-out"
         >
           <span>Browse All Tools</span>
           <ArrowRight className="w-4 h-4" />

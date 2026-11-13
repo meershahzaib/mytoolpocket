@@ -17,6 +17,42 @@ import {
   FileText,
   AlertCircle
 } from "lucide-react";
+import {
+  JsonFormatterTool,
+  JsonValidatorTool,
+  HtmlMinifierTool,
+  CssMinifierTool,
+  JsMinifierTool,
+  Base64Tool as DevBase64Tool,
+  UrlEncodeDecodeTool,
+  RegexTesterTool,
+  UuidGeneratorTool,
+  HashGeneratorTool as DevHashGeneratorTool,
+  JwtDecoderTool,
+  ColorConverterTool as DevColorConverterTool,
+  CssGradientGeneratorTool,
+  BoxShadowGeneratorTool,
+  BorderRadiusGeneratorTool,
+  MarkdownToHtmlTool,
+  UnixTimestampConverterTool,
+  CronExpressionGeneratorTool,
+  ColorPickerTool,
+  HtmlEntityEncoderTool
+} from "@/components/DevToolsRenderers";
+import {
+  MetaTagGeneratorTool as SeoMetaTagTool,
+  OpenGraphGeneratorTool,
+  RobotsTxtGeneratorTool,
+  KeywordDensityCheckerTool,
+  SerpPreviewTool,
+  UtmLinkBuilderTool,
+  SchemaMarkupGeneratorTool,
+  FaqSchemaGeneratorTool,
+  HtaccessRedirectGeneratorTool,
+  HeadingCheckerTool,
+  ReadingTimeCalculatorTool,
+  SitemapGeneratorTool
+} from "@/components/SeoToolsRenderers";
 import { ToolItem } from "@/data/tools";
 
 interface ToolRendererProps {
@@ -63,15 +99,80 @@ export default function ToolRenderer({ tool }: ToolRendererProps) {
     case "slug-generator":
       return <SlugGeneratorTool />;
 
-    // Developer & Other Tools
+    // 20 Developer Tools (Client-Side, zero-latency)
     case "json-formatter":
       return <JsonFormatterTool />;
+    case "json-validator":
+      return <JsonValidatorTool />;
+    case "html-minifier":
+      return <HtmlMinifierTool />;
+    case "css-minifier":
+      return <CssMinifierTool />;
+    case "js-minifier":
+      return <JsMinifierTool />;
+    case "base64-encode-decode":
     case "base64-encoder-decoder":
-      return <Base64Tool />;
+      return <DevBase64Tool />;
+    case "url-encode-decode":
+    case "url-encoder-decoder":
+      return <UrlEncodeDecodeTool />;
+    case "regex-tester":
+      return <RegexTesterTool />;
+    case "uuid-generator":
+      return <UuidGeneratorTool />;
+    case "hash-generator":
+      return <DevHashGeneratorTool />;
+    case "jwt-decoder":
+      return <JwtDecoderTool />;
+    case "color-converter":
+      return <DevColorConverterTool />;
+    case "css-gradient-generator":
+      return <CssGradientGeneratorTool />;
+    case "box-shadow-generator":
+      return <BoxShadowGeneratorTool />;
+    case "border-radius-generator":
+      return <BorderRadiusGeneratorTool />;
+    case "markdown-to-html":
+      return <MarkdownToHtmlTool />;
+    case "unix-timestamp-converter":
+      return <UnixTimestampConverterTool />;
+    case "cron-expression-generator":
+      return <CronExpressionGeneratorTool />;
+    case "color-picker":
+      return <ColorPickerTool />;
+    case "html-entity-encoder":
+    case "html-entity-converter":
+      return <HtmlEntityEncoderTool />;
+
+    // 12 SEO Tools (Phase 3)
+    case "meta-tag-generator":
+      return <SeoMetaTagTool />;
+    case "open-graph-generator":
+      return <OpenGraphGeneratorTool />;
+    case "robots-txt-generator":
+      return <RobotsTxtGeneratorTool />;
+    case "keyword-density-checker":
+      return <KeywordDensityCheckerTool />;
+    case "serp-preview":
+      return <SerpPreviewTool />;
+    case "utm-link-builder":
+      return <UtmLinkBuilderTool />;
+    case "schema-markup-generator":
+      return <SchemaMarkupGeneratorTool />;
+    case "faq-schema-generator":
+      return <FaqSchemaGeneratorTool />;
+    case "htaccess-redirect-generator":
+      return <HtaccessRedirectGeneratorTool />;
+    case "heading-checker":
+      return <HeadingCheckerTool />;
+    case "reading-time-calculator":
+      return <ReadingTimeCalculatorTool />;
+    case "sitemap-generator":
+      return <SitemapGeneratorTool />;
+
+    // Other Tools
     case "password-generator":
       return <PasswordGeneratorTool />;
-    case "meta-tag-generator":
-      return <MetaTagGeneratorTool />;
     case "percentage-calculator":
       return <PercentageCalculatorTool />;
     case "youtube-thumbnail-downloader":
@@ -100,7 +201,7 @@ function CopyButton({ text, label = "Copy" }: { text: string; label?: string }) 
     <button
       onClick={handleCopy}
       disabled={!text}
-      className="px-3.5 py-1.5 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] disabled:opacity-50 active:translate-x-0.5 active:translate-y-0.5 transition-all inline-flex items-center gap-1.5"
+      className="px-3.5 py-1.5 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514] disabled:opacity-50 active:translate-x-0.5 active:translate-y-0.5 transition-[transform,background-color] duration-100 ease-out inline-flex items-center gap-1.5"
     >
       {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
       <span>{copied ? "Copied" : label}</span>
@@ -123,39 +224,51 @@ function StatBox({ label, value }: { label: string; value: string | number }) {
 function WordCounterTool() {
   const [text, setText] = useState("");
 
-  const trimmed = text.trim();
-  const wordCount = trimmed ? trimmed.split(/\s+/).length : 0;
-  const charCount = text.length;
-  const charNoSpaces = text.replace(/\s+/g, "").length;
-  const sentenceCount = trimmed ? (text.match(/[^.!?]+[.!?]+(\s|$)/g) || [1]).length : 0;
-  const paragraphCount = trimmed ? text.split(/\n+/).filter((p) => p.trim().length > 0).length : 0;
-  const readingTimeMinutes = Math.ceil(wordCount / 200);
-  const speakingTimeMinutes = Math.ceil(wordCount / 130);
+  const stats = useMemo(() => {
+    const trimmed = text.trim();
+    const wordCount = trimmed ? trimmed.split(/\s+/).length : 0;
+    const charCount = text.length;
+    const charNoSpaces = text.replace(/\s+/g, "").length;
+    const sentenceCount = trimmed ? (text.match(/[^.!?]+[.!?]+(\s|$)/g) || [1]).length : 0;
+    const paragraphCount = trimmed ? text.split(/\n+/).filter((p) => p.trim().length > 0).length : 0;
+    const readingTimeMinutes = Math.ceil(wordCount / 200);
+    const speakingTimeMinutes = Math.ceil(wordCount / 130);
 
-  // Word density analysis
-  const wordDensity = useMemo(() => {
-    if (!trimmed) return [];
-    const words = trimmed.toLowerCase().match(/\b[a-zA-Z0-9']+\b/g) || [];
-    const freq: Record<string, number> = {};
-    for (const w of words) {
-      if (w.length > 2) {
-        freq[w] = (freq[w] || 0) + 1;
+    let wordDensity: [string, number][] = [];
+    if (trimmed) {
+      const words = trimmed.toLowerCase().match(/\b[a-zA-Z0-9']+\b/g) || [];
+      const freq: Record<string, number> = {};
+      for (const w of words) {
+        if (w.length > 2) {
+          freq[w] = (freq[w] || 0) + 1;
+        }
       }
+      wordDensity = Object.entries(freq)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 6);
     }
-    return Object.entries(freq)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 6);
-  }, [trimmed]);
+
+    return {
+      wordCount,
+      charCount,
+      charNoSpaces,
+      sentenceCount,
+      paragraphCount,
+      readingTimeMinutes,
+      speakingTimeMinutes,
+      wordDensity,
+    };
+  }, [text]);
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <StatBox label="Words" value={wordCount} />
-        <StatBox label="Characters" value={charCount} />
-        <StatBox label="No Spaces" value={charNoSpaces} />
-        <StatBox label="Sentences" value={sentenceCount} />
-        <StatBox label="Paragraphs" value={paragraphCount} />
-        <StatBox label="Read Time" value={`~${readingTimeMinutes} min`} />
+        <StatBox label="Words" value={stats.wordCount} />
+        <StatBox label="Characters" value={stats.charCount} />
+        <StatBox label="No Spaces" value={stats.charNoSpaces} />
+        <StatBox label="Sentences" value={stats.sentenceCount} />
+        <StatBox label="Paragraphs" value={stats.paragraphCount} />
+        <StatBox label="Read Time" value={`~${stats.readingTimeMinutes} min`} />
       </div>
 
       <div className="bg-[#ffffff] border-2 border-[#111111] rounded-xl p-4 shadow-[3px_3px_0px_#111111]">
@@ -168,7 +281,7 @@ function WordCounterTool() {
         />
         <div className="flex flex-wrap items-center justify-between gap-3 mt-3 pt-3 border-t border-[#e6dfd2]">
           <div className="text-xs text-[#666666]">
-            Speaking time: ~{speakingTimeMinutes} min | Real-time calculation
+            Speaking time: ~{stats.speakingTimeMinutes} min | Real-time calculation
           </div>
           <div className="flex items-center gap-2">
             <button
@@ -182,18 +295,18 @@ function WordCounterTool() {
         </div>
       </div>
 
-      {wordDensity.length > 0 && (
+      {stats.wordDensity.length > 0 && (
         <div className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-4 shadow-[2px_2px_0px_#111111]">
           <h3 className="text-xs font-bold uppercase tracking-wider text-[#666666] mb-2">
             Top Keyword Frequency
           </h3>
           <div className="flex flex-wrap gap-2">
-            {wordDensity.map(([w, count]) => (
+            {stats.wordDensity.map(([w, count]) => (
               <span
                 key={w}
                 className="px-2.5 py-1 rounded bg-[#f3eee3] border border-[#111111] text-xs font-semibold text-[#111111]"
               >
-                {w}: <span className="text-[#d9541e]">{count}x</span> ({Math.round((count / wordCount) * 100)}%)
+                {w}: <span className="text-[#d9541e]">{count}x</span> ({Math.round((count / Math.max(1, stats.wordCount)) * 100)}%)
               </span>
             ))}
           </div>
@@ -281,7 +394,7 @@ function CharacterCounterTool() {
                 </div>
                 <div className="w-full bg-[#e6dfd2] h-2 rounded-full overflow-hidden">
                   <div
-                    className={`h-full transition-all ${isOver ? "bg-red-500" : "bg-[#d9541e]"}`}
+                    className={`h-full transition-[width] duration-150 ease-out ${isOver ? "bg-red-500" : "bg-[#d9541e]"}`}
                     style={{ width: `${pct}%` }}
                   />
                 </div>
@@ -2063,169 +2176,8 @@ function SlugGeneratorTool() {
 }
 
 // -------------------------------------------------------------
-// EXISTING DEVELOPER / SEO / POMODORO UTILITIES
+// EXISTING CALCULATOR / YOUTUBE / POMODORO UTILITIES
 // -------------------------------------------------------------
-function JsonFormatterTool() {
-  const [input, setInput] = useState("");
-  const [error, setError] = useState<string | null>(null);
-
-  const formatJson = (spaces: number) => {
-    try {
-      if (!input.trim()) return;
-      const parsed = JSON.parse(input);
-      setInput(JSON.stringify(parsed, null, spaces));
-      setError(null);
-    } catch (e: any) {
-      setError(e.message || "Invalid JSON syntax");
-    }
-  };
-
-  const minifyJson = () => {
-    try {
-      if (!input.trim()) return;
-      const parsed = JSON.parse(input);
-      setInput(JSON.stringify(parsed));
-      setError(null);
-    } catch (e: any) {
-      setError(e.message || "Invalid JSON syntax");
-    }
-  };
-
-  return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-2">
-        <button
-          onClick={() => formatJson(2)}
-          className="px-3 py-1.5 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514]"
-        >
-          Format (2 Spaces)
-        </button>
-        <button
-          onClick={() => formatJson(4)}
-          className="px-3 py-1.5 text-xs font-bold bg-[#d9541e] text-[#ffffff] rounded-lg border border-[#111111] shadow-[2px_2px_0px_#111111] hover:bg-[#bf4514]"
-        >
-          Format (4 Spaces)
-        </button>
-        <button
-          onClick={minifyJson}
-          className="px-3 py-1.5 text-xs font-semibold bg-[#111111] text-[#f3eee3] rounded-lg border border-[#111111] hover:bg-[#333333]"
-        >
-          Minify JSON
-        </button>
-        <div className="ml-auto">
-          <CopyButton text={input} label="Copy JSON" />
-        </div>
-      </div>
-
-      {error && (
-        <div className="p-3 bg-red-50 border-2 border-red-500 rounded-lg text-xs font-mono text-red-700">
-          Syntax Error: {error}
-        </div>
-      )}
-
-      <div className="bg-[#ffffff] border-2 border-[#111111] rounded-xl p-3 shadow-[3px_3px_0px_#111111]">
-        <textarea
-          value={input}
-          onChange={(e) => {
-            setInput(e.target.value);
-            setError(null);
-          }}
-          placeholder='{"key": "value", "list": [1, 2, 3]}'
-          rows={14}
-          className="w-full p-3 bg-[#fdfbf7] border border-[#d4ccbd] rounded-lg text-xs font-mono text-[#111111] focus:outline-none focus:ring-2 focus:ring-[#111111] resize-y"
-        />
-      </div>
-    </div>
-  );
-}
-
-function Base64Tool() {
-  const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
-  const [mode, setMode] = useState<"encode" | "decode">("encode");
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!input) {
-      setOutput("");
-      setError(null);
-      return;
-    }
-    try {
-      setError(null);
-      if (mode === "encode") {
-        setOutput(btoa(unescape(encodeURIComponent(input))));
-      } else {
-        setOutput(decodeURIComponent(escape(atob(input))));
-      }
-    } catch (err: any) {
-      setError("Invalid Base64 sequence for decoding");
-    }
-  }, [input, mode]);
-
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <button
-          onClick={() => setMode("encode")}
-          className={`px-4 py-2 text-xs font-bold rounded-lg border border-[#111111] transition-all ${
-            mode === "encode"
-              ? "bg-[#d9541e] text-[#ffffff] shadow-[2px_2px_0px_#111111]"
-              : "bg-[#ffffff] text-[#111111]"
-          }`}
-        >
-          Encode to Base64
-        </button>
-        <button
-          onClick={() => setMode("decode")}
-          className={`px-4 py-2 text-xs font-bold rounded-lg border border-[#111111] transition-all ${
-            mode === "decode"
-              ? "bg-[#d9541e] text-[#ffffff] shadow-[2px_2px_0px_#111111]"
-              : "bg-[#ffffff] text-[#111111]"
-          }`}
-        >
-          Decode from Base64
-        </button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-[#ffffff] border-2 border-[#111111] rounded-xl p-4 shadow-[2px_2px_0px_#111111]">
-          <span className="block text-xs font-bold uppercase text-[#555555] mb-2">Input</span>
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder={mode === "encode" ? "Enter plain text to encode..." : "Enter Base64 string to decode..."}
-            rows={8}
-            className="w-full p-3 bg-[#fdfbf7] border border-[#d4ccbd] rounded-lg text-xs font-mono text-[#111111] focus:outline-none"
-          />
-        </div>
-
-        <div className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-4 shadow-[2px_2px_0px_#111111] flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold uppercase text-[#555555]">Result</span>
-              <CopyButton text={output} label="Copy Output" />
-            </div>
-            {error ? (
-              <div className="p-3 bg-red-50 text-red-700 text-xs rounded border border-red-400 font-mono">
-                {error}
-              </div>
-            ) : (
-              <textarea
-                readOnly
-                value={output}
-                placeholder="Result will appear here..."
-                rows={8}
-                className="w-full p-3 bg-[#fdfbf7] border border-[#d4ccbd] rounded-lg text-xs font-mono text-[#111111] focus:outline-none"
-              />
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function PasswordGeneratorTool() {
   const [length, setLength] = useState(16);
   const [includeUpper, setIncludeUpper] = useState(true);
@@ -2330,89 +2282,6 @@ function PasswordGeneratorTool() {
             />
             Symbols (!@#$)
           </label>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function MetaTagGeneratorTool() {
-  const [title, setTitle] = useState("My Awesome Website");
-  const [description, setDescription] = useState("A fast, high quality utility website built for modern creators.");
-  const [keywords, setKeywords] = useState("tools, utility, pocket, web tools");
-  const [author, setAuthor] = useState("mytoolpocket.com");
-  const [url, setUrl] = useState("https://mytoolpocket.com");
-
-  const generatedTags = `<!-- Primary Meta Tags -->
-<title>${title}</title>
-<meta name="title" content="${title}">
-<meta name="description" content="${description}">
-<meta name="keywords" content="${keywords}">
-<meta name="author" content="${author}">
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="${url}">
-<meta property="og:title" content="${title}">
-<meta property="og:description" content="${description}">
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="${url}">
-<meta property="twitter:title" content="${title}">
-<meta property="twitter:description" content="${description}">`;
-
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="bg-[#ffffff] border-2 border-[#111111] rounded-xl p-5 shadow-[3px_3px_0px_#111111] space-y-3">
-        <h4 className="text-xs font-bold uppercase tracking-wider text-[#666666]">Configure SEO Information</h4>
-        <div>
-          <label className="block text-xs font-semibold mb-1">Site / Page Title</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-2 bg-[#fdfbf7] border border-[#d4ccbd] rounded text-xs"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold mb-1">Meta Description</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={3}
-            className="w-full p-2 bg-[#fdfbf7] border border-[#d4ccbd] rounded text-xs"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold mb-1">Keywords</label>
-          <input
-            type="text"
-            value={keywords}
-            onChange={(e) => setKeywords(e.target.value)}
-            className="w-full p-2 bg-[#fdfbf7] border border-[#d4ccbd] rounded text-xs"
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold mb-1">Author</label>
-          <input
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            className="w-full p-2 bg-[#fdfbf7] border border-[#d4ccbd] rounded text-xs"
-          />
-        </div>
-      </div>
-
-      <div className="bg-[#ffffff] border-2 border-[#111111] border-l-4 border-l-[#d9541e] rounded-xl p-5 shadow-[3px_3px_0px_#111111] flex flex-col justify-between">
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#666666]">Generated HTML Code</h4>
-            <CopyButton text={generatedTags} label="Copy Meta Tags" />
-          </div>
-          <pre className="p-3 bg-[#fdfbf7] rounded-lg border border-[#d4ccbd] text-[11px] font-mono overflow-x-auto text-[#111111] leading-relaxed">
-            {generatedTags}
-          </pre>
         </div>
       </div>
     </div>
